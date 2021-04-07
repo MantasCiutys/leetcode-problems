@@ -8,19 +8,11 @@ public class ReverseLinkedList {
         Node next;
 
         while (curr != null) {
-            next = curr.getNext();
-            curr.setNext(prev);
+            next = curr.next;
+            curr.next = prev;
             prev = curr;
             curr = next;
         }
-    }
-
-    private static void printLinkedList(Node head) {
-        while (head != null) {
-            System.out.print(head.getVal() + " ");
-            head = head.getNext();
-        }
-        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -33,19 +25,19 @@ public class ReverseLinkedList {
         Node six = new Node(6);
         Node eight = new Node(8);
 
-        two.setNext(four);
-        four.setNext(six);
-        six.setNext(eight);
-        eight.setNext(null);
+        two.next = four;
+        four.next = six;
+        six.next = eight;
+        eight.next = null;
 
         // PRINT OUT INPUT
-        printLinkedList(two);
+        Node.printLinkedList(two);
 
         //REVERSE
         reverseLinkedList(two);
 
         // PRINT OUT OUTPUT
-        printLinkedList(eight);
+        Node.printLinkedList(eight);
     }
 
 
