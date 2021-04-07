@@ -39,8 +39,11 @@ public class CoinChange {
     public static void main(String[] args) {
         //int[] coins = {1, 2, 5};
         //int amount = 11;
-        int[] coins = {2};
-        int amount = 3;
+        //int[] coins = {2};
+        //int amount = 3;
+
+        int[] coins = {1, 2, 5};
+        int amount = 100;
 
         int naiveOutput = coinChange(coins, amount);
         System.out.println("Naive output: " + naiveOutput);
