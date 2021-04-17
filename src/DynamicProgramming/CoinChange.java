@@ -1,5 +1,6 @@
 package DynamicProgramming;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,18 +77,37 @@ public class CoinChange {
         return minCoins;
     }
 
+    private static int tabulatedCoinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+
+        dp[0] = 0; // base case
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                int leftOver = i - coins[j];
+                if (leftOver >= 0 && dp[leftOver] != Integer.MAX_VALUE) {
+                    dp[i] = Math.min(dp[i], 1 + dp[leftOver]);
+                }
+            }
+        }
+
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+    }
+
     public static void main(String[] args) {
-        int[] coins = {1, 2, 5};
-        int amount = 11;
-        //int[] coins = {2};
-        //int amount = 3;
+        //int[] coins = {1, 2, 5};
+        //int amount = 11;
+        int[] coins = {2};
+        int amount = 3;
 
         //int[] coins = {1, 2, 5};
         //int amount = 100;
 
         //int naiveOutput = naiveCoinChange(coins, amount);
         int memoOutput = memoCoinChange(coins, amount);
+        int tabulatedOutput = tabulatedCoinChange(coins, amount);
 
         System.out.println("Memoized output: " + memoOutput);
+        System.out.println("Tabulated output: " + tabulatedOutput);
     }
 }
